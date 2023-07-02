@@ -8,14 +8,14 @@ const jobRoutes = require("./routes/jobroutes");
 const app = express();
 
 connection();
-app.use(cors());
+app.use(cors()); 
 app.use(express.json()); 
 
 app.get('/test',(req, res) => {
     res.json("test ok");
 })
 app.use("/api/auth/", authRoutes); 
-app.use("/api/job/", jobRoutes);
+app.use("/api/job/", jobRoutes); 
 
 // app.use("")
 

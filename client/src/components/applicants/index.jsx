@@ -12,9 +12,9 @@ export default function Job() {
   const [jobs, setJobs] = React.useState([]);
   const [jobId, setJobId] = React.useState(null); 
   const getJobs = async () => {
-    const response = await axios.get('http://localhost:8080/api/job/post',  { headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGEwN2FlZTNhNTZhY2QzMzU4YWU5MGQiLCJuYW1lIjoidXNlciIsImlhdCI6MTY4ODMwOTQwMSwiZXhwIjoxNjg4OTE0MjAxfQ.tjUYoOwNAlOfB_evggWVvhEjD2z_3vYnJcaSpVNVs2w` }})
-    const data = await response.json();
-    setJobs(data.data);
+    const response = await axios.get('http://localhost:8080/api/auth/myjobs',  { headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGEwN2FlZTNhNTZhY2QzMzU4YWU5MGQiLCJuYW1lIjoidXNlciIsImlhdCI6MTY4ODMwOTQwMSwiZXhwIjoxNjg4OTE0MjAxfQ.tjUYoOwNAlOfB_evggWVvhEjD2z_3vYnJcaSpVNVs2w` }})
+      .then(res=> setJobs(res.data.data))
+      .catch(err=> console.log(err))
   };
   React.useEffect(() => {
     getJobs();
@@ -26,7 +26,7 @@ export default function Job() {
        setJobId(jId); 
   }
   return (
-    jobs.length &&
+    jobs.length>0 &&
     jobs.map((job) => (
       <Card jId={job._id} 
         sx={{

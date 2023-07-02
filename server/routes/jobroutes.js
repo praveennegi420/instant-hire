@@ -3,6 +3,7 @@ const {Applicant}= require('../models/applicant')
 const {Job}= require('../models/jobs')
 const bcrypt = require("bcrypt");
 const auth = require("../middleware/auth");
+const { route } = require("./auth");
 
 
 // POST JOB BY HR
@@ -35,16 +36,13 @@ router.get('/:id', async(req,res)=>{
 	res.send(200).send({data:job});
 })
 
-router.get('/post', auth, async(req, res)=>{
-	const jobs= await Job.find({userid: req.user._id});
-	res.send(200).status({data: jobs})
-})
 
-// GET ALL JOBS 
+
+// GET ALL JOBS  
 router.get('/', async(req,res)=>{
-	const jobs= await Job.find({});
+	const jobs= await Job.find({}); 
 	res.status(200).send({data: jobs});
-})
+}) 
 
 
 module.exports = router;

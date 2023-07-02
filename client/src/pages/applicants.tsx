@@ -269,7 +269,7 @@ export default function EnhancedTable() {
         salary: number,
     ): Data {
         return {
-            name,
+            name, 
             email,
             phone,
             experience,
