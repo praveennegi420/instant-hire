@@ -12,8 +12,8 @@ export default function Signup() {
                             <div className="mt-[20px] w-[100%] flex ">Name <input type="text" className="ml-auto" /></div>
                             <div className="mt-[20px] w-[100%] flex ">Email <input type="text" className="ml-auto" /></div>
                             <div className="mt-[20px] w-[100%] flex">Password <input type="text" className="ml-auto" /></div>
+                            <button className="bg-learnWhite">Sign Up</button>
                         </div>
-
 
                     </form>
                 </div>
