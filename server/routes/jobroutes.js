@@ -7,7 +7,7 @@ const auth = require("../middleware/auth");
 
 // POST JOB BY HR
 router.post("/post", auth, async(req,res)=>{
-	let job= await new Job({...req.body}).save();
+	let job= await new Job({...req.body, userid: req.user._id}).save();
 	res.status(200).send({message: "Job Posted."})
 })
 
@@ -23,11 +23,22 @@ router.post("/apply", async(req, res)=>{
 })
 
 // GET APPLICANTS BY JOB ID ( HR CAN CHECK )
-router.get("/applicants/:id", auth, async (req, res) => {
+router.get("/applicants/:id", auth,  async (req, res) => {
 	const jobid= req.params.id; console.log(jobid)
 	const users = await Applicant.find({jobid:jobid});
 	res.status(200).send({ data: users });
 });
+
+// GET JOB BY ID
+router.get('/:id', async(req,res)=>{
+	const job = await Job.findOne({ _id: req.params.id })
+	res.send(200).send({data:job});
+})
+
+router.get('/post', auth, async(req, res)=>{
+	const jobs= await Job.find({userid: req.user._id});
+	res.send(200).status({data: jobs})
+})
 
 // GET ALL JOBS 
 router.get('/', async(req,res)=>{

@@ -20,6 +20,7 @@ body{
   box-shadow: 0 .25rem 1rem 0 #2e385614;
 }
 
+
 h3{
   font-size: 1.17em;
   margin-block-start: 1em;
@@ -36,6 +37,7 @@ h3{
   padding: .2rem 1rem;
   border-radius: 10px;
 }
+
 input[type="text"],input[type="password"],
 input[type="email"],input[type="number"],
 input[type="tel"],
@@ -66,4 +68,30 @@ button.primary{
   width:121px;
   padding:2.5rem;
   margin-right:0.2rem;
+}
+.job-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px 100px;
+}
+
+.title-location{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.apply-btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: flex-end;
+  position: relative; 
+}
+
+.span-txt{
+  font-weight: 600;
+  margin-right: 2px;
 }
