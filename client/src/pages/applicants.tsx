@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useContext} from 'react';
+import {useSelector} from 'react-redux'
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -243,12 +244,13 @@ export default function EnhancedTable() {
     const [dense, setDense] = React.useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [applicantData, setApplicantData] = React.useState([]);
+    const {token} = useSelector((state) => state.auth);
     const [rowsPerPage, setRowsPerPage] = React.useState(8);
     useEffect(() => {
         const fetchData = async () => {
             await axios.get('http://localhost:8080/api/job/applicants/64a07b0b3a56acd3358ae911', {
                 headers: {
-                    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGEwN2FlZTNhNTZhY2QzMzU4YWU5MGQiLCJuYW1lIjoidXNlciIsImlhdCI6MTY4ODI4NDcyOSwiZXhwIjoxNjg4ODg5NTI5fQ.R02640DzoKLSvAwwr8e3eoCjetWa4Wa41GaQTEyjZkQ`,
+                    Authorization: `Bearer ${token}`,
                 }
             }).then(res => { setApplicantData(res.data.data); setLoading(false); })
                 .catch(err => console.log(err))
