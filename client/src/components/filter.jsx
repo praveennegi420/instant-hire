@@ -51,9 +51,12 @@ function FilterRangeSlider({ range, min, max, fitlerName, setRange, disable }) {
 
 
 const FilterAdminModal = ({ isOpen, setIsOpen, handleFilter }) => {
-  
+
   const formClose = () => { setIsOpen(false) };
+  const [cgpa, setCgpa] = useState('')
+  const [experience, setExperience] = useState('')
   const [pricingRange, setPricingRange] = useState(0);
+
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -97,7 +100,7 @@ const FilterAdminModal = ({ isOpen, setIsOpen, handleFilter }) => {
                 </div>
                 <div>
                   <div className="w-[35em] mx-auto">
-                    
+
                   </div>
                   <div className="relative">
                     <div className=" top-0 left-0 right-0 flex justify-center absolute font-bold text-xl font-roboto select-none">
@@ -117,11 +120,16 @@ const FilterAdminModal = ({ isOpen, setIsOpen, handleFilter }) => {
                       <span>$100000</span>
                     </div>
                   </div>
-                  
+                  <div className="flex justify-evenly">
+                    <TextField id="outlined-basic" label="Minimum CGPA" variant="outlined" value={cgpa}
+                      onChange={() => { setCgpa(event.target.value); }} />
+                    <TextField id="outlined-basic" label="Minimum Experience" variant="outlined" value={experience}
+                      onChange={() => { setExperience(event.target.value); }} />
+                  </div>
 
                   <div className="flex justify-center mt-[1rem]">
                     <button
-                      onClick={() => handleFilter({pricingRange, sps, firstDate, secondDate, ratings})}
+                      onClick={() => handleFilter({ pricingRange, cgpa, experience })}
                       className="bg-blue hover:bg-mid-blue rounded-lg py-2 px-16 text-white font-roboto "
                     >
                       Apply Filter
