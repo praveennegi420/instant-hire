@@ -30,13 +30,16 @@ router.get("/applicants/:id", auth,  async (req, res) => {
 	res.status(200).send({ data: users });
 });
 
-// GET JOB BY ID
-router.get('/:id', async(req,res)=>{
-	const job = await Job.findOne({ _id: req.params.id })
-	res.send(200).send({data:job});
-})
-
-
+router.post("/applicants/:id", auth,  async (req, res) => {
+	const jobid= req.params.id; console.log(jobid)
+	const {price, cgpa, exp} = req.params; 
+	const users = await Applicant.find({jobid:jobid});
+	let newUsers  = users;
+	newUsers = newUsers.filter(user => user.cgpa > cgpa) ;
+	newUsers = newUsers.filter(user=> user.experience > exp); 
+	newUsers = newUsers.filter(user=>user.salaryexpect > price); 
+	res.status(200).send({ data: newUsers });
+});
 
 // GET ALL JOBS  
 router.get('/', async(req,res)=>{
