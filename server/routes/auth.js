@@ -2,6 +2,8 @@ const router = require("express").Router();
 const { User } = require("../models/user");
 const bcrypt = require("bcrypt");
 const auth = require("../middleware/auth");
+const {Job}= require('../models/jobs')
+
 
 router.post("/login", async (req, res) => {
 	const user = await User.findOne({ email: req.body.email });
@@ -39,5 +41,9 @@ router.post("/signup", async (req, res) => {
 		.send({ data: newUser, message: "Account created successfully" });
 });
 
+router.get('/myjobs', auth, async(req,res)=>{
+	const job = await Job.find({ userid: req.user._id})
+	res.status(200).send({data:job});
+})
 
 module.exports = router;
