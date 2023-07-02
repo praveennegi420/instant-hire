@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 export default function Applicants({jId}) {
   const [applicants, setApplicants] = React.useState([]);
   const getApplicants = async () => {
-    const response = await fetch(`http://localhost:8000/api/job/applicants/${jobId}`, {
+    const response = await fetch(`http://localhost:8000/api/job/applicants/${jId}`, {
       method: "GET",
     });
     const data = await response.json();
