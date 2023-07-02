@@ -9,7 +9,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
+import TableRow from '@mui/material/TableRow'; 
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -352,22 +352,9 @@ export default function EnhancedTable() {
         return data;
     }
 
-    const filterData = ({ firstDate, secondDate }) => {
+    const filterData = ({ pricingRange, cgpa, experience }) => {
         setIsOpen(false)
-        try {
-            let MM = Number(firstDate.$M) + 1
-            const date1 = firstDate.$y + '-' + MM + '-' + firstDate.$D || ''
-            MM = Number(secondDate.$M) + 1
-            const date2 = secondDate.$y + '-' + MM + '-' + secondDate.$D || ''
-
-            filterFilter({ date1, date2 })
-                .then(res => {
-                    setLoading(false)
-                    setTableData(res.data.data.booking)
-                })
-                .catch(err => setLoading(false))
-        }
-        catch (err) { }
+        console.log(pricingRange, cgpa, experience);
     }
 
     return (

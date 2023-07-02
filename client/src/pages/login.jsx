@@ -12,18 +12,18 @@ export default function LoginPage() {
   async function handleLoginSubmit(ev) {
     ev.preventDefault();
     try {
-      const {data} = await axios.post('/api/auth/login', {email,password});
-      alert('Login successful');
+      const {data} = await axios.post('http://localhost:8080/api/auth/login', {email,password});
       localStorage.setItem('token',JSON.stringify(data.data));
       dispatch(addToken());
       setRedirect(true);
     } catch (error) {
+      console.log(error)
       alert('Login failed');
     }
   }
 
   if (redirect) {
-    return <Navigate to={'/'} />
+    return <Navigate to={'/dashboard'} />
   }
 
   return (
@@ -43,7 +43,7 @@ export default function LoginPage() {
                  onChange={ev => setPassword(ev.target.value)} />
           <button className="primary">Login</button>
           <div className="text-center py-2 text-gray-500">
-            Don't have an account yet? <Link className="underline text-black" to={'/register'}>Register now</Link>
+            Don't have an account yet? <Link className="underline text-black" to={'/signup'}>Register now</Link>
           </div>
         </form>
       </div>

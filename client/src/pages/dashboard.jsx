@@ -1,13 +1,13 @@
 import Navbar from "../components/navbar"
-import Job from "../components/jobs"
 import Applicants from "../components/applicants"
-export default function Home(){
+
+export default function Dashboard(){
 
     return (
         <>
             <Navbar/>  
             <div className="job-container mt-[5rem] flex justify-between">
-               <Job />   
+               <Applicants />   
             </div>   
         </>
     )
