@@ -29,7 +29,7 @@ export default function Job() {
   return (
     jobs.length &&
     jobs.map((job) => (
-      <Card jId={job._id} onClick={seeApplicants()}
+      <Card jId={job._id} 
         sx={{
           minHeight: 155, 
           minWidth: 230,
@@ -78,6 +78,6 @@ export default function Job() {
           </Button>
         </CardActions>
       </Card>
-    )) && <Applicants jId={jobId}/>
+    ))
   );
 }
