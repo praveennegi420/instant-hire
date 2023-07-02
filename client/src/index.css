@@ -37,8 +37,6 @@ h3{
   padding: .2rem 1rem;
   border-radius: 10px;
 }
-<<<<<<< HEAD
-
 .job-container{
   display: flex;
   flex-direction: row;
@@ -64,7 +62,8 @@ h3{
 .span-txt{
   font-weight: 600;
   margin-right: 2px;;
-=======
+}
+
 input[type="text"],input[type="password"],
 input[type="email"],input[type="number"],
 input[type="tel"],
@@ -90,10 +89,10 @@ button.primary{
     width: 100%;
     border-radius:1rem;
 }
+
 .profile-image{
   height:118px;
   width:121px;
   padding:2.5rem;
   margin-right:0.2rem;
->>>>>>> new-changes
 }

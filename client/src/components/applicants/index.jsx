@@ -5,26 +5,30 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import axios from 'axios'
+import Applicants from "../applicants";
 
-export default function Applicants({jId}) {
-  const [applicants, setApplicants] = React.useState([]);
-  const getApplicants = async () => {
-    const response = await fetch(`http://localhost:8000/api/job/applicants/${jId}`, {
-      method: "GET",
-    });
+export default function Job() {
+  const [jobs, setJobs] = React.useState([]);
+  const [jobId, setJobId] = React.useState(null); 
+  const getJobs = async () => {
+    const response = await axios.get('http://localhost:8080/api/job/post',  { headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGEwN2FlZTNhNTZhY2QzMzU4YWU5MGQiLCJuYW1lIjoidXNlciIsImlhdCI6MTY4ODMwOTQwMSwiZXhwIjoxNjg4OTE0MjAxfQ.tjUYoOwNAlOfB_evggWVvhEjD2z_3vYnJcaSpVNVs2w` }})
     const data = await response.json();
-    console.log(data);
-    setApplicants(data.data);
+    setJobs(data.data);
   };
   React.useEffect(() => {
-    getApplicants();
+    getJobs();
   }, []);
 
-  console.log(applicants);
+  console.log(jobs);
+  const  seeApplicants = (jId) =>{
+       setJobs([]); 
+       setJobId(jId); 
+  }
   return (
-    applicants.length &&
-    applicants.map((applicant) => (
-      <Card userId={applicant._id}
+    jobs.length &&
+    jobs.map((job) => (
+      <Card jId={job._id} 
         sx={{
           minHeight: 155, 
           minWidth: 230,
@@ -39,44 +43,26 @@ export default function Applicants({jId}) {
               color="text.primary"
               gutterBottom
             >
-              {applicant.name}
+              {job.title}
             </Typography>
-            {/* <Typography
+            <Typography
               sx={{ fontSize: 14, fontWeight: 900 }}
               color="text.primary"
               gutterBottom
             >
-              {applicant.experience}
-            </Typography> */}
+              {job.location}
+            </Typography>
           </div>
-          <Typography variant="body2">
-            <span className="span-txt">Experience:</span> 
-            {applicant.experience}
-            <br />
+
+          <Typography sx={{ mb: 1.5, fontWeight: 600 }} color="text.secondary overflow:" >
+            {job.company}
           </Typography>
-          <Typography variant="body2">
-          <span className="span-txt"> Email:  </span>
-            {applicant.email}
-            <br />
-          </Typography>
-          <Typography variant="body2"><span className="span-txt">Phone no.:</span> 
-            {applicant.phone}
-            <br />
-          </Typography>
-          <Typography variant="body2"><span className="span-txt">Education:</span>  
-            {applicant.education}
-            <br />
-          </Typography>
-          <Typography variant="body2"> <span className="span-txt">CGPA:</span> 
-            {applicant.cgpa}
-            <br />
-          </Typography>
-          <Typography variant="body2"><span className="span-txt">salary expectation: </span> 
-            {applicant.salaryexpect}
+          <Typography variant="body2" sx={{height: 250, overflow: 'hidden'}}>
+            {job.description}
             <br />
           </Typography>
         </CardContent>
-        {/* <CardActions className="apply-btn">
+        <CardActions className="apply-btn">
           <Button
             sx={{
               color: "white",
@@ -87,9 +73,9 @@ export default function Applicants({jId}) {
             }}
             size="small"
           >
-            Apply
+            See Applicants
           </Button>
-        </CardActions> */}
+        </CardActions>
       </Card>
     ))
   );
