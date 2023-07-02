@@ -532,20 +532,24 @@ video {
   margin-right: auto;
 }
 
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-64 {
+  margin-bottom: 16rem;
+}
+
 .ml-auto {
   margin-left: auto;
 }
 
-.mt-\[20px\] {
-  margin-top: 20px;
+.mt-20 {
+  margin-top: 5rem;
 }
 
 .flex {
   display: flex;
-}
-
-.h-\[80vh\] {
-  height: 80vh;
 }
 
 .h-\[8vh\] {
@@ -556,50 +560,52 @@ video {
   width: 100%;
 }
 
-.w-\[25rem\] {
-  width: 25rem;
+.max-w-md {
+  max-width: 28rem;
 }
 
-.w-\[80\%\] {
-  width: 80%;
+.grow {
+  flex-grow: 1;
 }
 
 .items-center {
   align-items: center;
 }
 
-.justify-center {
-  justify-content: center;
+.justify-around {
+  justify-content: space-around;
 }
 
-.rounded-lg {
-  border-radius: 0.5rem;
-}
-
-.bg-termWhite {
-  --tw-bg-opacity: 1;
-  background-color: rgb(147 155 180 / var(--tw-bg-opacity));
-}
-
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.p-\[20px\] {
-  padding: 20px;
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .pl-\[3rem\] {
   padding-left: 3rem;
 }
 
-.text-left {
-  text-align: left;
-}
-
 .text-center {
   text-align: center;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.underline {
+  text-decoration-line: underline;
 }
 
 @font-face {
@@ -640,4 +646,33 @@ h3{
   color: #586380;
   padding: .2rem 1rem;
   border-radius: 10px;
+}
+
+input[type="text"],input[type="password"],
+input[type="email"],input[type="number"],
+input[type="tel"],
+textarea{
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-radius: 10px;
+}
+
+textarea{
+  height: 140px;
+}
+
+button{
+  background-color: rgb(209 213 219);
+}
+
+button.primary{
+  background-color: #686a6b;
+  padding:0.5rem;
+  color:white;
+  margin-top: 1rem;
+  width: 100%;
+  border-radius:1rem;
 }

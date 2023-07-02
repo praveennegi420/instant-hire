@@ -36,3 +36,28 @@ h3{
   padding: .2rem 1rem;
   border-radius: 10px;
 }
+input[type="text"],input[type="password"],
+input[type="email"],input[type="number"],
+input[type="tel"],
+textarea{
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    border-radius: 10px;
+}
+textarea{
+    height: 140px;
+}
+button{
+    background-color: rgb(209 213 219);
+}
+button.primary{
+    background-color: #686a6b;
+    padding:0.5rem;
+    color:white;
+    margin-top: 1rem;
+    width: 100%;
+    border-radius:1rem;
+}
