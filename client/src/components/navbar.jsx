@@ -19,7 +19,7 @@ export default function Navbar() {
         <>
             <nav className="w-[100%]">
                 <div className="h-[8vh] flex items-center nav-bar">
-                    <h3 className="pl-[3rem]">Instant Hire</h3>
+                    <Link to='/'> <h3 className="pl-[3rem]">Instant Hire</h3></Link>
                     
                     {
                         !token?

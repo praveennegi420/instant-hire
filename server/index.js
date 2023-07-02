@@ -21,5 +21,5 @@ app.use("/api/job/", jobRoutes);
 
 
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Listening on port ${port}...`));

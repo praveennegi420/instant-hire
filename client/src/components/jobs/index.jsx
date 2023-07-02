@@ -11,7 +11,7 @@ export default function Job() {
   const [jobs, setJobs] = React.useState([]);
   const [jobId, setJobId] = React.useState(null); 
   const getJobs = async () => {
-    const response = await fetch(`http://localhost:8000/api/job`, {
+    const response = await fetch(`http://localhost:8080/api/job`, {
       method: "GET",
     });
     const data = await response.json();
@@ -58,7 +58,7 @@ export default function Job() {
           <Typography sx={{ mb: 1.5, fontWeight: 600 }} color="text.secondary overflow:" >
             {job.company}
           </Typography>
-          <Typography variant="body2">
+          <Typography variant="body2" sx={{height: 250, overflow: 'hidden'}}>
             {job.description}
             <br />
           </Typography>
