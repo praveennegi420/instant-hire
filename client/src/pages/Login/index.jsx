@@ -47,7 +47,7 @@ const Login = () => {
 				</Link>
 			</div>
 			<main className={styles.main}>
-				<h1 className={styles.heading}>Login & enjoy Listening your favorite music.</h1>
+				<h1 className={styles.heading}>Login and find you next job</h1>
 				
 				<p className={styles.or_container}>or</p>
 				<form onSubmit={handleSubmit} className={styles.form_container}>

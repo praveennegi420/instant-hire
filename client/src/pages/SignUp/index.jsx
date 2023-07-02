@@ -89,7 +89,7 @@ const SignUp = () => {
 	return (
 		<div className={styles.container}>
 	
-			<h1 className={styles.heading}>Sign up for free to start listening.</h1>
+			<h1 className={styles.heading}>Sign up for your next job search</h1>
 			<Button
 				label="Sign up with Facebook"
 				style={{ background: "#1877f2", color: "white" }}

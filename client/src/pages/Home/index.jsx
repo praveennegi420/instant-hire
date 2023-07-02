@@ -5,9 +5,9 @@ import Playlist from "../../components/Playlist";
 import styles from "./styles.module.scss";
 
 const Home = () => {
-	const [firstPlaylists, setFirstPlaylists] = useState([]);
-	const [secondPlaylists, setSecondPlaylists] = useState([]);
-	const [isFetching, setIsFetching] = useState(false);
+	// const [firstPlaylists, setFirstPlaylists] = useState([]);
+	// const [secondPlaylists, setSecondPlaylists] = useState([]);
+	// const [isFetching, setIsFetching] = useState(false);
 
 	const getRandomPlaylists = async () => {
 		try {
