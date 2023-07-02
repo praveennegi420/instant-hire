@@ -13,6 +13,7 @@
   "dependencies": {
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
+    "@headlessui/react": "^1.7.15",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
     "@mui/utils": "latest",
