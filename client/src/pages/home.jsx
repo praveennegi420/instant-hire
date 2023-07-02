@@ -7,7 +7,7 @@ export default function Home(){
         <>
             <Navbar/>  
             <div className="job-container">
-               <Applicants />   
+               <Job />   
             </div>   
         </>
     )
