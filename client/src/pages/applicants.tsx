@@ -271,9 +271,17 @@ export default function EnhancedTable() {
     const [rowsPerPage, setRowsPerPage] = React.useState(8);
 
 
-    // useEffect(async()=>{
-        // const applicants= axios.get('')
-    // })
+    useEffect( async()=>{
+        const {data}=  axios.get('http://localhost:8080/api/job/applicants/64a07b0b3a56acd3358ae911',{
+            headers: {
+                Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGEwN2FlZTNhNTZhY2QzMzU4YWU5MGQiLCJuYW1lIjoidXNlciIsImlhdCI6MTY4ODI4NDcyOSwiZXhwIjoxNjg4ODg5NTI5fQ.R02640DzoKLSvAwwr8e3eoCjetWa4Wa41GaQTEyjZkQ`,
+            }
+        })
+
+        console.log(data)
+        setApplicantData(data)
+    },[])
+
 
     const handleRequestSort = (
         event: React.MouseEvent<unknown>,
