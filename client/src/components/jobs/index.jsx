@@ -5,9 +5,11 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import Applicants from "../applicants";
 
 export default function Job() {
   const [jobs, setJobs] = React.useState([]);
+  const [jobId, setJobId] = React.useState(null); 
   const getJobs = async () => {
     const response = await fetch(`http://localhost:8000/api/job`, {
       method: "GET",
@@ -20,10 +22,14 @@ export default function Job() {
   }, []);
 
   console.log(jobs);
+  const  seeApplicants = (jId) =>{
+       setJobs([]); 
+       setJobId(jId); 
+  }
   return (
     jobs.length &&
     jobs.map((job) => (
-      <Card userId={job._id}
+      <Card jId={job._id} onClick={seeApplicants()}
         sx={{
           minHeight: 155, 
           minWidth: 230,
@@ -72,6 +78,6 @@ export default function Job() {
           </Button>
         </CardActions>
       </Card>
-    ))
+    )) && <Applicants jId={jobId}/>
   );
 }

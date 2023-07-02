@@ -6,10 +6,10 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-export default function Applicants() {
+export default function Applicants({jId}) {
   const [applicants, setApplicants] = React.useState([]);
   const getApplicants = async () => {
-    const response = await fetch(`http://localhost:8000/api/job/applicants/64a07b0b3a56acd3358ae911`, {
+    const response = await fetch(`http://localhost:8000/api/job/applicants/${jobId}`, {
       method: "GET",
     });
     const data = await response.json();
