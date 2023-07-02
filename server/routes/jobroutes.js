@@ -28,6 +28,12 @@ router.get("/applicants/:id", auth,  async (req, res) => {
 	res.status(200).send({ data: users });
 });
 
+// GET JOB BY ID
+router.get('/:id', async(req,res)=>{
+	const job = await Job.findOne({ _id: req.params.id })
+	res.send(200).send({data:job});
+})
+
 // GET ALL JOBS 
 router.get('/', async(req,res)=>{
 	const jobs= await Job.find({});
