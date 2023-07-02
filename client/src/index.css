@@ -37,30 +37,3 @@ h3{
   padding: .2rem 1rem;
   border-radius: 10px;
 }
-
-.job-container{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px 100px;
-}
-
-.title-location{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.apply-btn{
-  display: flex;
-  flex-direction: row;
-  justify-content: end;
-  align-items: flex-end;
-  position: relative; 
-}
-
-.span-txt{
-  font-weight: 600;
-  margin-right: 2px;;
-}

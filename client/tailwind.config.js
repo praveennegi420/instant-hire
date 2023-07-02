@@ -9,7 +9,9 @@ export default {
         colors:{
           bgWhite: "#f6f7fb",
           learnWhite: "#586380",
-          termWhite: "#939bb4"
+          termWhite: "#939bb4",
+          "mid-blue": "rgba(0, 122, 255, 1)",
+          blue: "rgba(0, 133, 255, 1)",
         }
       },
     },
