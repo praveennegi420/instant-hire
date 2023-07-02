@@ -22,9 +22,9 @@ export default function Signup() {
         <>
             <Navbar />
             <div className="mt-20 grow flex items-center justify-around">
-                <div className="mb-64">
-                    <h1 className="text-4xl text-center mb-4">Signup</h1>
-                    <form className="max-w-md mx-auto" onSubmit={registerUser}>
+                <div className="pt-10 mb-64">
+                    <h1 className="text-5xl text-center mb-4">Signup</h1>
+                    <form className="pt-4 max-w-md mx-auto" onSubmit={registerUser}>
                     <input type="text"
                             placeholder="John Doe"
                             value={name}
