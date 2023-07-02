@@ -23,7 +23,7 @@ export default function Job() {
   return (
     jobs.length &&
     jobs.map((job) => (
-      <Card
+      <Card userId={job._id}
         sx={{
           minHeight: 155, 
           minWidth: 230,

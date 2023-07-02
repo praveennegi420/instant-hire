@@ -42,6 +42,7 @@ h3{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 20px;
   padding: 20px 100px;
 }
 
@@ -58,4 +59,9 @@ h3{
   align-items: flex-end;
   position: relative; 
   bottom: 0;
+}
+
+.span-txt{
+  font-weight: 600;
+  margin-right: 2px;;
 }
