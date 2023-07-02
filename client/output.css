@@ -604,18 +604,6 @@ video {
   margin-top: 1rem;
 }
 
-.mt-\[10rem\] {
-  margin-top: 10rem;
-}
-
-.mt-\[20rem\] {
-  margin-top: 20rem;
-}
-
-.mt-\[15rem\] {
-  margin-top: 15rem;
-}
-
 .mt-\[5rem\] {
   margin-top: 5rem;
 }
@@ -806,10 +794,6 @@ video {
   padding-top: 1rem;
 }
 
-.pt-\[10rem\] {
-  padding-top: 10rem;
-}
-
 .text-left {
   text-align: left;
 }
@@ -941,33 +925,6 @@ h3{
   border-radius: 10px;
 }
 
-.job-container{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px 100px;
-}
-
-.title-location{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.apply-btn{
-  display: flex;
-  flex-direction: row;
-  justify-content: end;
-  align-items: flex-end;
-  position: relative;
-}
-
-.span-txt{
-  font-weight: 600;
-  margin-right: 2px;
-}
-
 input[type="text"],input[type="password"],
 input[type="email"],input[type="number"],
 input[type="tel"],
@@ -1002,6 +959,33 @@ button.primary{
   width:121px;
   padding:2.5rem;
   margin-right:0.2rem;
+}
+
+.job-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px 100px;
+}
+
+.title-location{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.apply-btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: flex-end;
+  position: relative;
+}
+
+.span-txt{
+  font-weight: 600;
+  margin-right: 2px;
 }
 
 .hover\:bg-mid-blue:hover {

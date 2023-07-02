@@ -32,8 +32,8 @@ export default function Job() {
       <Card jId={job._id} 
         sx={{
           minHeight: 155, 
-          minWidth: 230,
-          maxWidth: 230,
+          minWidth: 250,
+          maxWidth: 270,
           boxShadow: " 8px 8px 6px  #2e385614;",
         }}
       >
