@@ -271,9 +271,9 @@ export default function EnhancedTable() {
     const [rowsPerPage, setRowsPerPage] = React.useState(8);
 
 
-    useEffect(async()=>{
-        const applicants= axios.get('')
-    })
+    // useEffect(async()=>{
+        // const applicants= axios.get('')
+    // })
 
     const handleRequestSort = (
         event: React.MouseEvent<unknown>,
