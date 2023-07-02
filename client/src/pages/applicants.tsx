@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useContext} from 'react';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -246,7 +247,6 @@ export default function EnhancedTable() {
     const [dense, setDense] = React.useState(false);
     const [applicantData, setApplicantData] = React.useState([]);
     const [rowsPerPage, setRowsPerPage] = React.useState(8);
-
     useEffect(() => {
         const fetchData = async () => {
             await axios.get('http://localhost:8080/api/job/applicants/64a07b0b3a56acd3358ae911', {
