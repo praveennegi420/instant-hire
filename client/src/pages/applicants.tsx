@@ -13,6 +13,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
+import { ClipLoader } from "react-spinners";
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -21,7 +22,7 @@ import { visuallyHidden } from '@mui/utils';
 import Navbar from '../components/navbar';
 import axios from 'axios'
 import { useEffect, useState } from 'react';
-
+import FilterAdminModal from '../components/filter';
 interface Data {
     calories: number;
     carbs: number;
@@ -29,32 +30,6 @@ interface Data {
     name: string;
     protein: number;
 }
-
-function createData(
-    name: string,
-    email: string,
-    phone: string,
-    experience: number,
-    education: string,
-    cgpa: number,
-    salary: number,
-    skills: string,
-): Data {
-    return {
-        name,
-        email,
-        phone,
-        experience,
-        education,
-        cgpa,
-        skills,
-        salary
-    };
-}
-
-const rows = [
-    createData('USER', 'user@gmail.com', '93934838399', 1,'college',9.5, 20,'react, mern'),
-];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
     if (b[orderBy] < a[orderBy]) {
@@ -146,7 +121,7 @@ const headCells: readonly HeadCell[] = [
         id: 'salary',
         numeric: true,
         disablePadding: true,
-        label: 'Expected CTC(in Lakhs)',
+        label: 'Expected CTC(in $)',
     }
 ];
 
@@ -184,8 +159,8 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
-                        align= 'left'
-                        padding= 'none'
+                        align='left'
+                        padding='none'
                         sortDirection={orderBy === headCell.id ? order : false}
                     >
                         <TableSortLabel
@@ -251,11 +226,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
                     </IconButton>
                 </Tooltip>
             ) : (
-                <Tooltip title="Filter list">
-                    <IconButton>
-                        <FilterListIcon />
-                    </IconButton>
-                </Tooltip>
+                <></>
             )}
         </Toolbar>
     );
@@ -264,16 +235,52 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
 export default function EnhancedTable() {
     const [order, setOrder] = React.useState<Order>('asc');
     const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
+    const [loading, setLoading] = React.useState(true);
+    // const [rows, setRows]= React.useState([]);
     const [selected, setSelected] = React.useState<readonly string[]>([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
-    const [applicantData, setApplicantData]= React.useState({});
+    const [isOpen, setIsOpen] = useState(false);
+    const [applicantData, setApplicantData] = React.useState([]);
     const [rowsPerPage, setRowsPerPage] = React.useState(8);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            await axios.get('http://localhost:8080/api/job/applicants/64a07b0b3a56acd3358ae911', {
+                headers: {
+                    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGEwN2FlZTNhNTZhY2QzMzU4YWU5MGQiLCJuYW1lIjoidXNlciIsImlhdCI6MTY4ODI4NDcyOSwiZXhwIjoxNjg4ODg5NTI5fQ.R02640DzoKLSvAwwr8e3eoCjetWa4Wa41GaQTEyjZkQ`,
+                }
+            }).then(res => { setApplicantData(res.data.data); setLoading(false); })
+                .catch(err => console.log(err))
+        }
+        fetchData();
+    }, [])
 
-    useEffect(async()=>{
-        const applicants= axios.get('')
-    })
+    function createData(
+        name: string,
+        email: string,
+        phone: string,
+        experience: number,
+        education: string,
+        cgpa: number,
+        skills: string,
+        salary: number,
+    ): Data {
+        return {
+            name,
+            email,
+            phone,
+            experience,
+            education,
+            cgpa,
+            skills,
+            salary
+        };
+    }
+
+    const rows = applicantData.map(user => {
+        return createData(user.name, user.email, user.phone, user.experience, user.education, user.cgpa, user.skills, user.salaryexpect);
+    });
 
     const handleRequestSort = (
         event: React.MouseEvent<unknown>,
@@ -324,7 +331,6 @@ export default function EnhancedTable() {
 
     const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
-    // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
@@ -337,13 +343,48 @@ export default function EnhancedTable() {
         [order, orderBy, page, rowsPerPage],
     );
 
+    const filterFilter = async ({ date1, date2 }) => {
+
+        const data = await axios.post('http://localhost:8080/api/job/applicants/64a07b0b3a56acd3358ae911', { firstDate: date1, lastDate: date2 },
+            { headers: { Authorization: `Bearer ${user.data.token}` } });
+        return data;
+    }
+
+    const filterData = ({ firstDate, secondDate }) => {
+        setIsOpen(false)
+        try {
+            let MM = Number(firstDate.$M) + 1
+            const date1 = firstDate.$y + '-' + MM + '-' + firstDate.$D || ''
+            MM = Number(secondDate.$M) + 1
+            const date2 = secondDate.$y + '-' + MM + '-' + secondDate.$D || ''
+
+            filterFilter({ date1, date2 })
+                .then(res => {
+                    setLoading(false)
+                    setTableData(res.data.data.booking)
+                })
+                .catch(err => setLoading(false))
+        }
+        catch (err) { }
+    }
+
     return (
         <>
             <Navbar />
-            <div className='flex justify-center'>
-                <Box sx={{ width: '90%' , paddingTop:'5rem'}}>
+            <div className='flex justify-center items-center w-[100%]'>
+                <Box sx={{ width: '90%', paddingTop: '5rem', margin: 'auto' }}>
+
                     <Paper sx={{ width: '100%', mb: 2 }}>
-                        <EnhancedTableToolbar numSelected={selected.length} />
+                        <div className='flex '>
+                            <EnhancedTableToolbar numSelected={selected.length} />
+                            <div className='ml-auto mr-[4rem]' onClick={()=>{setIsOpen(true);}}>
+                            <Tooltip title="Filter list" >
+                                <IconButton>
+                                    <FilterListIcon />
+                                </IconButton>
+                            </Tooltip>
+                            </div>
+                        </div>
                         <TableContainer>
                             <Table
                                 sx={{ minWidth: 750 }}
@@ -358,59 +399,60 @@ export default function EnhancedTable() {
                                     onRequestSort={handleRequestSort}
                                     rowCount={rows.length}
                                 />
-                                <TableBody>
-                                    {visibleRows.map((row, index) => {
-                                        const isItemSelected = isSelected(row.name);
-                                        const labelId = `enhanced-table-checkbox-${index}`;
+                                {loading ? (<div className="text-center mx-auto mt-[4em]"><ClipLoader /></div>) : (
+                                    <TableBody>
+                                        {visibleRows.map((row, index) => {
+                                            const isItemSelected = isSelected(row.name);
+                                            const labelId = `enhanced-table-checkbox-${index}`;
 
-                                        return (
-                                            <TableRow
-                                                hover
-                                                onClick={(event) => handleClick(event, row.name)}
-                                                role="checkbox"
-                                                aria-checked={isItemSelected}
-                                                tabIndex={-1}
-                                                key={row.name}
-                                                selected={isItemSelected}
-                                                sx={{ cursor: 'pointer' }}
-                                            >
-                                                <TableCell padding="checkbox">
-                                                    <Checkbox
-                                                        color="primary"
-                                                        checked={isItemSelected}
-                                                        inputProps={{
-                                                            'aria-labelledby': labelId,
-                                                        }}
-                                                    />
-                                                </TableCell>
-                                                <TableCell
-                                                    component="th"
-                                                    id={labelId}
-                                                    scope="row"
-                                                    padding="none"
+                                            return (
+                                                <TableRow
+                                                    hover
+                                                    onClick={(event) => handleClick(event, row.name)}
+                                                    role="checkbox"
+                                                    aria-checked={isItemSelected}
+                                                    tabIndex={-1}
+                                                    key={row.name}
+                                                    selected={isItemSelected}
+                                                    sx={{ cursor: 'pointer' }}
                                                 >
-                                                    {row.name}
-                                                </TableCell>
-                                                <TableCell padding="none" over>{row.email}</TableCell>
-                                                <TableCell padding="none">{row.phone}</TableCell>
-                                                <TableCell padding="none">{row.experience}</TableCell>
-                                                <TableCell padding="none">{row.education}</TableCell>
-                                                <TableCell padding="none">{row.cgpa}</TableCell>
-                                                <TableCell padding='none'>{row.skills}</TableCell>
-                                                <TableCell >{row.salary}</TableCell>
+                                                    <TableCell padding="checkbox">
+                                                        <Checkbox
+                                                            color="primary"
+                                                            checked={isItemSelected}
+                                                            inputProps={{
+                                                                'aria-labelledby': labelId,
+                                                            }}
+                                                        />
+                                                    </TableCell>
+                                                    <TableCell
+                                                        component="th"
+                                                        id={labelId}
+                                                        scope="row"
+                                                        padding="none"
+                                                    >
+                                                        {row.name}
+                                                    </TableCell>
+                                                    <TableCell padding="none" over>{row.email}</TableCell>
+                                                    <TableCell padding="none">{row.phone}</TableCell>
+                                                    <TableCell padding="none">{row.experience}</TableCell>
+                                                    <TableCell padding="none">{row.education}</TableCell>
+                                                    <TableCell padding="none">{row.cgpa}</TableCell>
+                                                    <TableCell padding='none'>{row.skills}</TableCell>
+                                                    <TableCell >{row.salary}</TableCell>
+                                                </TableRow>
+                                            );
+                                        })}
+                                        {emptyRows > 0 && (
+                                            <TableRow
+                                                style={{
+                                                    height: (dense ? 33 : 53) * emptyRows,
+                                                }}
+                                            >
+                                                <TableCell colSpan={6} />
                                             </TableRow>
-                                        );
-                                    })}
-                                    {emptyRows > 0 && (
-                                        <TableRow
-                                            style={{
-                                                height: (dense ? 33 : 53) * emptyRows,
-                                            }}
-                                        >
-                                            <TableCell colSpan={6} />
-                                        </TableRow>
-                                    )}
-                                </TableBody>
+                                        )}
+                                    </TableBody>)}
                             </Table>
                         </TableContainer>
                         <TablePagination
@@ -424,6 +466,7 @@ export default function EnhancedTable() {
                         />
                     </Paper>
                 </Box>
+                <FilterAdminModal isOpen={isOpen} setIsOpen={setIsOpen} handleFilter={filterData} />
             </div>
         </>
     );
