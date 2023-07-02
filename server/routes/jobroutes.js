@@ -4,6 +4,7 @@ const {Job}= require('../models/jobs')
 const bcrypt = require("bcrypt");
 const auth = require("../middleware/auth");
 
+
 // POST JOB BY HR
 router.post("/post", auth, async(req,res)=>{
 	let job= await new Job({...req.body}).save();
