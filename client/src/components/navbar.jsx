@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom'
-import { useContext, useState } from 'react';
-import { UserContext } from '../UserContext';
+import {useState } from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import image from '/images/user.png'
+import { reset } from '../features/authSlice';
 export default function Navbar() {
-    const {user} = useContext(UserContext);
     const [open, setOpen] = useState(false);
-    const {setUser} = useContext(UserContext);
+    const dispatch = useDispatch();
+    const {token} = useSelector((state) => state.auth);
     function toggleUser() {
-        setUser(null);
+        dispatch(reset());
     }
     function toggleOpen() {
         setOpen(prev => !prev);
@@ -21,7 +22,7 @@ export default function Navbar() {
                     <h3 className="pl-[3rem]">Instant Hire</h3>
                     
                     {
-                        !user?
+                        !token?
                         <>
                         <button type="button" aria-label="Options" className="ml-auto nav-link">
                             <Link to='/login'>Log In</Link>

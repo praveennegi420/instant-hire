@@ -1,9 +1,14 @@
 import Navbar from "../components/navbar"
-
+import Job from "../components/jobs"
+import Applicants from "../components/applicants"
 export default function Home(){
+
     return (
         <>
-            <Navbar/>        
+            <Navbar/>  
+            <div className="job-container">
+               <Job />   
+            </div>   
         </>
     )
 }

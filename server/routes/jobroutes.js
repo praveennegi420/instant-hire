@@ -23,7 +23,7 @@ router.post("/apply", async(req, res)=>{
 })
 
 // GET APPLICANTS BY JOB ID ( HR CAN CHECK )
-router.get("/applicants/:id", auth, async (req, res) => {
+router.get("/applicants/:id", auth,  async (req, res) => {
 	const jobid= req.params.id; console.log(jobid)
 	const users = await Applicant.find({jobid:jobid});
 	res.status(200).send({ data: users });
