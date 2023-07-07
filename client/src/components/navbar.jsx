@@ -9,6 +9,7 @@ export default function Navbar() {
     const dispatch = useDispatch();
     const {token} = useSelector((state) => state.auth);
     function toggleUser() {
+        localStorage.clear();
         dispatch(reset());
     }
     function toggleOpen() {

@@ -1,5 +1,5 @@
 import { createSlice,} from "@reduxjs/toolkit";
-const token = JSON.parse(localStorage.getItem('token'));
+const token = JSON.stringify(localStorage.getItem('token'));
 let initialState = {
     token:token?token:null,
     loading:false,
@@ -9,7 +9,7 @@ export const authSlice = createSlice({
     initialState,
     reducers:{
         addToken:(state,action) => {
-            state.token = JSON.parse(localStorage.getItem('token'));
+            state.token = JSON.stringify(localStorage.getItem('token'));
         },
         reset: (state) => {
             state.token = null;
