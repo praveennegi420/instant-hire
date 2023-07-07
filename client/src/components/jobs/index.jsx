@@ -27,7 +27,7 @@ export default function Job() {
        setJobId(jId); 
   }
   return (
-    jobs.length &&
+    jobs.length>0 &&
     jobs.map((job) => (
       <Card jId={job._id} 
         sx={{
